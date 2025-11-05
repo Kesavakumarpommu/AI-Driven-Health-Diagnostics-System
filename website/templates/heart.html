@@ -1,0 +1,120 @@
+{% extends "disease_page.html" %}
+{% block page %}
+<br><br><br>
+
+<div class="container">
+  <div class="text-center">
+    <h2 style="margin-top: 60px;">🩺 Heart Disease Prediction Form</h2>
+    <p class="lead">Enter your health parameters below to assess your risk of heart disease.</p>
+  </div>
+  <hr>
+
+  <form action="/predict" method="POST">
+    <input type="hidden" name="disease" value="heart">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <label for="age">Age</label>
+        <input class="form-control" type="number" min="0" required name="age" placeholder="Age">
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="sex">Gender</label>
+        <select class="form-control" id="sex" name="sex" required>
+          <option value="1">Male</option>
+          <option value="0">Female</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="cp">Chest Pain Type</label>
+        <select class="form-control" id="cp" name="cp" required>
+          <option value="0">Typical Angina</option>
+          <option value="1">Atypical Angina</option>
+          <option value="2">Non-Anginal Pain</option>
+          <option value="3">Asymptomatic</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="trestbps">Resting Blood Pressure (mm Hg)</label>
+        <input class="form-control" type="number" min="0" required name="trestbps" placeholder="Resting BP">
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="chol">Serum Cholesterol (mg/dl)</label>
+        <input class="form-control" type="number" min="0" step="any" required name="chol" placeholder="Cholesterol">
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="fbs">Fasting Blood Sugar > 120 mg/dl</label>
+        <select class="form-control" id="fbs" name="fbs" required>
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="restecg">Resting ECG Result</label>
+        <select class="form-control" id="restecg" name="restecg" required>
+          <option value="0">Normal</option>
+          <option value="1">ST-T wave abnormality</option>
+          <option value="2">Left ventricular hypertrophy</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="thalach">Max Heart Rate Achieved</label>
+        <input class="form-control" type="number" min="0" step="any" required name="thalach" placeholder="Max HR">
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="exang">Exercise-Induced Angina</label>
+        <select class="form-control" id="exang" name="exang" required>
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="oldpeak">ST Depression (Oldpeak)</label>
+        <input class="form-control" type="number" min="0" step="any" required name="oldpeak" placeholder="Oldpeak">
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="slope">Slope of Peak ST Segment</label>
+        <select class="form-control" id="slope" name="slope" required>
+          <option value="0">Upsloping</option>
+          <option value="1">Flat</option>
+          <option value="2">Downsloping</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="ca">Major Vessels Colored by Fluoroscopy</label>
+        <select class="form-control" id="ca" name="ca" required>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="thal">Thalassemia</label>
+        <select class="form-control" id="thal" name="thal" required>
+          <option value="1">Normal</option>
+          <option value="2">Fixed Defect</option>
+          <option value="3">Reversible Defect</option>
+        </select>
+      </div>
+    </div>
+
+    <br><br><br>
+    <div class="col-md-4 col-md-offset-4 text-center">
+      <button type="submit" class="btn btn-success">Predict</button>
+    </div>
+  </form>
+</div>
+
+<br><br><br>
+{% endblock %}

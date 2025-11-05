@@ -1,0 +1,65 @@
+{% extends "disease_page.html" %}
+{% block page %}
+<br><br><br>
+
+<div class="container">
+  <div class="text-center">
+    <h2 style="margin-top: 60px;">🩺 Kidney Disease Prediction Form</h2>
+    <p class="lead">Enter your health parameters below to assess your risk of kidney disease.</p>
+  </div>
+  <hr>
+
+  <form action="/predict" method="POST">
+    <!-- ✅ Identify which disease this form is for -->
+    <input type="hidden" name="disease" value="kidney">
+
+    <div class="row">
+
+      <!-- Numeric inputs -->
+      {% for field, label in [
+        ('age', 'Age'), ('bp', 'Blood Pressure'), ('sg', 'Specific Gravity'),
+        ('al', 'Albumin'), ('su', 'Sugar'), ('bgr', 'Blood Glucose Random'),
+        ('bu', 'Blood Urea'), ('sc', 'Serum Creatinine'), ('sod', 'Sodium'),
+        ('pot', 'Potassium'), ('hemo', 'Hemoglobin'), ('pcv', 'Packed Cell Volume'),
+        ('wc', 'White Blood Cell Count'), ('rc', 'Red Blood Cell Count')
+      ] %}
+      <div class="col-md-4 col-md-offset-4">
+        <label for="{{ field }}">{{ label }}</label>
+        <input class="form-control" type="number" step="any" min="0" name="{{ field }}" required>
+      </div>
+      {% endfor %}
+
+      <!-- Categorical inputs -->
+      {% for field, label, options in [
+        ('rbc', 'Red Blood Cells', [('0', 'normal'), ('1', 'abnormal')]),
+        ('pc', 'Pus Cell', [('0', 'normal'), ('1', 'abnormal')]),
+        ('pcc', 'Pus Cell Clumps', [('0', 'notpresent'), ('1', 'present')]),
+        ('ba', 'Bacteria', [('0', 'notpresent'), ('1', 'present')]),
+        ('htn', 'Hypertension', [('0', 'no'), ('1', 'yes')]),
+        ('dm', 'Diabetes Mellitus', [('0', 'no'), ('1', 'yes')]),
+        ('cad', 'Coronary Artery Disease', [('0', 'no'), ('1', 'yes')]),
+        ('appet', 'Appetite', [('0', 'good'), ('1', 'poor')]),
+        ('pe', 'Pedal Edema', [('0', 'no'), ('1', 'yes')]),
+        ('ane', 'Anemia', [('0', 'no'), ('1', 'yes')])
+      ] %}
+      <div class="col-md-4 col-md-offset-4">
+        <label for="{{ field }}">{{ label }}</label>
+        <select class="form-control" name="{{ field }}" required>
+          {% for val, text in options %}
+          <option value="{{ val }}">{{ text }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      {% endfor %}
+
+    </div>
+
+    <br><br>
+    <div class="col-md-4 col-md-offset-4 text-center">
+      <button type="submit" class="btn btn-success">Predict</button>
+    </div>
+  </form>
+</div>
+
+<br><br><br>
+{% endblock %}

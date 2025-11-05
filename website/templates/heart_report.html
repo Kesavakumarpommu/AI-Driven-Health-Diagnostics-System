@@ -1,0 +1,47 @@
+{% extends "disease_page.html" %}
+{% block page %}
+<div class="container mt-5">
+  <h3 class="text-center" style="margin-top: 100px;">Heart Disease Diagnostic Report</h3>
+  <hr>
+
+  <div class="card p-4">
+    <h4>🧪 Submitted Parameters:</h4>
+    <ul>
+      {% for key, value in input_data.items() %}
+        <li><strong>{{ key }}:</strong> {{ value }}</li>
+      {% endfor %}
+    </ul>
+
+    <hr>
+    <h4>📊 Prediction Result:</h4>
+    <div class="alert {{ prediction_class }} text-center">
+      <h2 class="fw-bold">{{ prediction_text }}</h2>
+    </div>
+
+    <hr>
+    <h4>🩺 Recommended Action:</h4>
+    {% if prediction_value == 1 %}
+      <p>You may be at risk for heart disease. Please consult a cardiologist. General advice:</p>
+      <ul>
+        <li>Adopt a heart-healthy diet (low salt, low fat)</li>
+        <li>Exercise regularly (walking, swimming)</li>
+        <li>Monitor cholesterol and blood pressure</li>
+        <li>Avoid smoking and manage stress</li>
+      </ul>
+    {% else %}
+      <p>No significant heart risk detected. To maintain heart health:</p>
+      <ul>
+        <li>Stay physically active</li>
+        <li>Eat plenty of fruits, vegetables, and whole grains</li>
+        <li>Limit saturated fats and sugar</li>
+        <li>Get regular heart checkups</li>
+      </ul>
+    {% endif %}
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="/heart_form" class="btn btn-primary">🔙 Back to Form</a>
+    <a href="/download_csv?user={{ user_name }}&disease=heart" class="btn btn-outline-success ms-3">⬇️ Download Report (.csv)</a>
+  </div>
+</div>
+{% endblock %}

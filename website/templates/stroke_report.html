@@ -1,0 +1,47 @@
+{% extends "disease_page.html" %}
+{% block page %}
+<div class="container mt-5">
+  <h3 class="text-center" style="margin-top: 100px;">Stroke Risk Diagnostic Report</h3>
+  <hr>
+
+  <div class="card p-4">
+    <h4>🧪 Submitted Parameters:</h4>
+    <ul>
+      {% for key, value in input_data.items() %}
+        <li><strong>{{ key }}:</strong> {{ value }}</li>
+      {% endfor %}
+    </ul>
+
+    <hr>
+    <h4>📊 Prediction Result:</h4>
+    <div class="alert {{ prediction_class }} text-center">
+      <h2 class="fw-bold">{{ prediction_text }}</h2>
+    </div>
+
+    <hr>
+    <h4>🩺 Recommended Action:</h4>
+    {% if prediction_value == 1 %}
+      <p>You may be at risk for stroke. Please consult a neurologist. General advice:</p>
+      <ul>
+        <li>Control blood pressure and cholesterol</li>
+        <li>Exercise regularly and maintain a healthy weight</li>
+        <li>Limit alcohol and avoid smoking</li>
+        <li>Manage diabetes and heart conditions</li>
+      </ul>
+    {% else %}
+      <p>No significant stroke risk detected. To stay protected:</p>
+      <ul>
+        <li>Stay active and eat a balanced diet</li>
+        <li>Monitor blood pressure and glucose levels</li>
+        <li>Get routine health screenings</li>
+        <li>Avoid smoking and excessive alcohol</li>
+      </ul>
+    {% endif %}
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="/stroke_form" class="btn btn-primary">🔙 Back to Form</a>
+    <a href="/download_csv?user={{ user_name }}&disease=stroke" class="btn btn-outline-success ms-3">⬇️ Download Report (.csv)</a>
+  </div>
+</div>
+{% endblock %}

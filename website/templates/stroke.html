@@ -1,0 +1,104 @@
+{% extends "disease_page.html" %}
+{% block page %}
+<br><br><br><br>
+
+<div class="container">
+  <div class="text-center">
+    <h2 style="margin-top: 60px;">🧠 Stroke Prediction Form</h2>
+    <p class="lead">Enter your health parameters below to assess your risk of stroke.</p>
+  </div>
+  <hr>
+
+  <form action="/predict" method="POST">
+    <!-- Hidden field to identify disease -->
+    <input type="hidden" name="disease" value="stroke">
+
+    <div class="row">
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="Gender">Gender</label>
+        <select class="form-control" name="Gender" required>
+          <option value="1">Male</option>
+          <option value="0">Female</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="age">Age</label>
+        <input class="form-control" type="number" min="0" name="age" required placeholder="Age">
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="hypertension">Hypertension</label>
+        <select class="form-control" name="hypertension" required>
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="heart_disease">Heart Disease</label>
+        <select class="form-control" name="heart_disease" required>
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="ever_married">Ever Married</label>
+        <select class="form-control" name="ever_married" required>
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="work_type">Work Type</label>
+        <select class="form-control" name="work_type" required>
+          <option value="0">Private</option>
+          <option value="1">Self-employed</option>
+          <option value="2">Government Job</option>
+          <option value="3">Children Care</option>
+          <option value="4">Never Worked</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="Residence_type">Residence Type</label>
+        <select class="form-control" name="Residence_type" required>
+          <option value="1">Urban</option>
+          <option value="0">Rural</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="avg_glucose_level">Average Glucose Level</label>
+        <input class="form-control" type="number" min="0" step="any" name="avg_glucose_level" required placeholder="Glucose Level">
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="bmi">BMI</label>
+        <input class="form-control" type="number" min="0" step="any" name="bmi" required placeholder="Body Mass Index">
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <label for="smoking_status">Smoking Status</label>
+        <select class="form-control" name="smoking_status" required>
+          <option value="0">Never Smoked</option>
+          <option value="1">Sometimes</option>
+          <option value="2">Formerly Smoked</option>
+          <option value="3">Smokes</option>
+        </select>
+      </div>
+
+    </div>
+
+    <br><br><br>
+    <div class="col-md-4 col-md-offset-4 text-center">
+      <button type="submit" class="btn btn-success">Predict</button>
+    </div>
+  </form>
+</div>
+
+<br><br><br>
+{% endblock %}

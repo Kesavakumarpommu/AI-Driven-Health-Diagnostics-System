@@ -1,0 +1,51 @@
+{% extends "disease_page.html" %}
+{% block page %}
+<br><br><br>
+
+<div class="container">
+  <h3 class="text-center" style="margin-top: 100px;">Diabetes Diagnostic Report</h3>
+  <hr>
+
+  <div class="card p-4">
+    <h4>🧪 Submitted Parameters:</h4>
+    <ul>
+      {% for key, value in input_data.items() %}
+        <li><strong>{{ key }}:</strong> {{ value }}</li>
+      {% endfor %}
+    </ul>
+
+    <hr>
+    <h4>📊 Prediction Result:</h4>
+    <div class="alert {{ prediction_class }} text-center">
+      <h2 class="fw-bold">{{ prediction_text }}</h2>
+    </div>
+
+    <hr>
+    <h4>🩺 Recommended Action:</h4>
+    {% if prediction_value == 1 %}
+      <p>You may be at risk for diabetes. Please consult a healthcare professional. Here are some general remedies:</p>
+      <ul>
+        <li>Maintain a balanced diet low in refined sugars</li>
+        <li>Exercise regularly (at least 30 minutes/day)</li>
+        <li>Monitor blood glucose levels</li>
+        <li>Stay hydrated and manage stress</li>
+      </ul>
+    {% else %}
+      <p>No significant risk detected. To stay healthy:</p>
+      <ul>
+        <li>Continue regular physical activity</li>
+        <li>Eat a fiber-rich, balanced diet</li>
+        <li>Get routine checkups</li>
+        <li>Limit sugary drinks and processed foods</li>
+      </ul>
+    {% endif %}
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="/diabete_form" class="btn btn-primary">🔙 Back to Form</a>
+    <a href="/download_csv?user={{ user_name }}&disease=diabetes" class="btn btn-outline-success ms-3">⬇️ Download Report (.csv)</a>
+  </div>
+</div>
+
+<br><br><br>
+{% endblock %}
